@@ -1,4 +1,4 @@
-pip install -U langchain langchain-core langchain-openai langchain-chroma langchain_community
+pip install -U langchain langchain-core langchain-openai langchain-chroma langchain-community
 pip install -U chromadb openai python-dotenv tiktoken
 
 # openai: Official SDK to call OpenAI APIs directly
