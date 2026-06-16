@@ -1,0 +1,282 @@
+Day 01:
+=======
+LLM and Gen AI
+RAG
+More RAG
+Agentic AI
+Observability, Cost Awareness etc.
+
+Tokens:
+=======
+One word != One token.
+One word can be split into multiple tokens.
+
+LLMs (AI Models: GPT, Claude, Gemini...)
+LLM: Large Language Models
+Large:
+Language: Not Python, C#, C++, Java.
+	Spoken/written languages
+	LLMs can cater to many languages.
+	Machines/systems do not understand languages. They understand numbers.
+	We have dictionary of words - LLMs also have a vocabulary for each language.
+		- it is not in "words" per se, but in numerical format.
+		- this numerical representation of words is called TOKENS.
+	Not just words, punctuations also: , . = - + - * / ( )  [] ";~ -> Tokens
+[1234, 78569, 7845, 9552]
+	
+Probability: Next word generation
+---
+LLM comes up with a list of "next most probable words"
+Query: The cat jumped over the:
+Words:
+dog
+chair
+table
+fence
+tree
+kid
+toy
+wall
+moon
+sleeping dog
+puddle
+:
+:
+
+AI (Assistant) Response:
+The cat jumped over the fence
+
+toy
+chair
+dog
+
+
+LLMs are internally based on very complex Neural Network (NN).
+
+Generate an email to reply to a customer complaint about late delivery.
+Input to the LLM: Generate an email to reply to a customer complaint about late delivery.
+AI (Assistant/LLM) Response:
+Pass 1: List of most probable words, it will pick one: Apology
+Pass 2: Generate an email to reply to a customer complaint about late delivery. Apology
+	- this gets passed to the LLM again to determine the next probable word.
+	- for
+Pass 3: Generate an email to reply to a customer complaint about late delivery. Apology for
+Pass 4: Generate an email to reply to a customer complaint about late delivery. Apology for Delay
+Pass 5: Generate an email to reply to a customer complaint about late delivery. Apology for Delay in
+Pass 6: Generate an email to reply to a customer complaint about late delivery. Apology for Delay in Delivery
+
+Eventually:
+Dear [Customer Name],
+
+Thank you for bringing this matter to our attention.
+
+We sincerely apologize for the delay in delivering your order. We understand how frustrating it can be when an expected delivery does not arrive on time, and we regret any inconvenience this has caused.
+
+After reviewing your order, we found that the delay occurred due to [brief reason, e.g., unexpected logistics issues, carrier delays, high order volume, etc.]. While this is not the level of service we strive to provide, we are taking steps to ensure such delays are minimized in the future.
+
+Your order is currently [status update, e.g., in transit and expected to arrive on DD/MM/YYYY]. We are closely monitoring its progress and will keep you informed of any updates.
+
+As a gesture of goodwill, we would like to offer [discount, refund, store credit, etc., if applicable].
+
+We value your business and appreciate your patience and understanding. If you have any further questions or concerns, please feel free to contact us.
+
+Sincerely,
+
+[Your Name]
+[Your Position]
+[Company Name]
+[Contact Information]
+	
+Thee LLM is trained to understand the significance of each word with every other word, sentence and paragaph in the given context.
+
+The same word has a different meaning in different contexts.
+Ex: Bank
+Financial bank
+Bank of a river
+Blood bank
+
+bank: 6922
+
+LLM also has "reasoning power".
+- used not just for 
+
+"Which word to return next".
+- to explain the question properly.
+- it does not impact the "value" of the answer.
+- if you upload an csv file and ask it do some analysis on it - prediction.
+- Prediction will be the same, but the way the answer is generated (words it give to explain answer) is different every time.
+
+Context Window:
+Context window size is 8000 tokens
+System prompt: 	200 tokens
+User query:	   	100 tokens
+-------------------------
+				300 tokens
+For the AI assistant to respond, it has 8000 - 300 tokens available: 7700 tokens
+
+System prompt: 	200 tokens
+User query:	   	100 tokens
+Document:	   3000 tokens
+-------------------------
+			   3300 tokens
+For the AI assistant to respond, it has 8000 - 3300 tokens available: 4700 tokens
+
+System prompt: 	200 tokens
+User query:	   	100 tokens
+Document:	   3000 tokens
+More context:  1000 tokens
+-------------------------
+			   4300 tokens
+For the AI assistant to respond, it has 8000 - 4300 tokens available: 3700 tokens
+
+Context window is made up of the:
+- system prompt
+- user query
+- docs (RAG)
+- other context
+- output (from the AI model)
+
+System prompt: 	200 tokens
+User query:	   	100 tokens
+Document:	   5000 tokens
+More context:  1000 tokens
+-------------------------
+			   6300 tokens (input)
+For the AI assistant to respond, it has 8000 - 6300 tokens available: 1700 tokens.
+If the AI response is > the available no. of tokens (1700), the output will be truncated.
+
+
+
+Top-p:
+---
+Query: The cat jumped over the:
+List of Probable Words:
+dog				0.05
+chair 			0.07
+table			0.09
+fence			0.30
+tree			0.01
+kid				0.03
+toy				0.10
+wall			0.25
+moon			0.20
+sleeping dog	0.05
+puddle			0.15
+:
+:
+
+top-p = 0.9 (90%)
+Order the list in descending order
+fence			0.30
+wall			0.25
+moon			0.20
+toy				0.10
+puddle			0.15
+--------------------
+table			0.09
+chair 			0.07
+sleeping dog	0.05
+dog				0.05
+kid				0.03
+tree			0.01
+
+it will pick words that form the top 90% of the list at random.
+
+top-k: determines the size of the list of next probable words
+top-k = 25
+top-k = 5
+
+3 message types for LLMs:
+System
+User
+AI/Assistant
+
+Answers based on the data on which it has been trained.
+Oct/Nov 2022, -> ChatGPT was launched
+What happened in New York 2 days ago?
+I don't know because I don't have information about it yet.
+LLMs were trained on data that was at least 6-8 months old.
+
+But now,
+if it does not have the answer i it's "data", it fetches it from the internet automatically.
+"Searching the web"
+
+Hallucination does not necessarily mean it is wrong.
+It could "look right", but may not be so.
+
+
+dog
+cat
+kitten
+puppy
+queen
+king
+man
+woman
+
+CTRL+SHIFT+P
+
+python -m pip install python-dotenv
+
+Day 02:
+=======
+top-k vs max-tokens
+
+top-k = how many "next probable" values/words will the LLM pick from.
+top-k=25
+
+max-tokens = size of the total tokens that the LLM can return (input+output) - context window.
+
+RAG vs Fine-tuning:
+---
+The AI system is RAG-enabled - look for answers from a "trusted source".
+- Documents: policies, SOPs, contracts, Standards, domain specific docs...
+- csv
+
+Fine-tuning:
+Niche process - trade secret.
+Use AI (LLM) to speed up the process of analysing company data to come up with decisions.
+
+ChatGpt (public)
+Create their own LLM specific to their work/process/data.
+Creating an LLM Scratch : very time consuming, very expensive, very talented and expert people.
+
+They took an existing LLM and "re-trained" it on their data/process.
+- Fine-tuning
+
+Llama3 - LLM from Meta (Facebook)
+Setup on their environment (private cloud, their servers) and fine-tuned it with their data/processes.
+- not publicly available.
+- fine-tuning requires tech people (programmers etc.)
+- cleansing the data
+	- invalid data
+	- missing data
+	- which columns/properties are to be used for training
+- how much of the data to use for training and testing and validation
+	- 70/20/10
+- work on the NN to train it to understand your data....
+- a lot of iterations
+- defining the behavior of the model
+	- system prompt
+	- output
+	
+Specific LLMs -> Medical research, Legal
+	- either built from scratch or they could be fine-tuned on specific domain data
+	
+RAG:
+- chunking
+- embedding
+- indexing
+
+1. Create the .env file in the root folder.
+	- provide your OPENAI_API_KEY
+2. Init the virtual env: python -m venv .venv
+
+Windows:
+3. .\.venv\Scripts\Activate.ps1
+
+Ubuntu/Mac:
+3. source ./.venv/bin/activate
+
+Day 03:
+=======
