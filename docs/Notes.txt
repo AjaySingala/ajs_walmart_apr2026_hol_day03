@@ -280,3 +280,61 @@ Ubuntu/Mac:
 
 Day 03:
 =======
+Either built from scratch or they could be fine tuned on specific domain data. How much of the data to use for training and testing and validation
+
+Chunk size = 10
+Chunk overlap = 3
+Chunk01: Either built from scratch or they could be fine tuned
+Chunk02: be fine tuned specific domain data. How much of the data to
+         -------------
+Chunk03: the data to use for training and testing and validation
+		 -----------
+
+
+Prompt:
+First look for data in the given RAG source.
+If not found, look for information at these locations:
+http://www.someweb1.com/
+http://www.someweb2.com/
+http://www.someweb3.com/
+
+Or get the information from your training data.
+
+Get it from the internet.
+
+
+Context:
+{context}
+
+Question: {QUERY}
+
+Leaves
+HR Policy
+Travel policy
+
+Determine the "type/category" of the user query:
+- leave
+- hr
+- travel
+- operations
+
+Ask the LLM to figure out the category.
+
+prompt = f""""
+Based on the query provided, determine the category of query.
+
+Categories are:
+- LeavePolicy
+- OperationsPolicy
+- HRPolicy
+- TravelPolicy
+- WellnessPolicy
+- AnalyticsPolicy
+- ProjectPolicy
+
+Query: {query}
+
+Return only one of the listed categories.
+"""
+
+Dynamically set the filter
