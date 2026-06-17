@@ -21,7 +21,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # TODO: Extract the TEXT_EMBEDDING_MODEL environment variable value and store it in a variable EMBED_MODEL. 
 
 
-# TODO: Extract the MODEL_NAME environment variable value and store it in a variable CHAT_MODEL. 
+# TODO: Extract the MODEL_NAME environment variable value and store it in a variable EMBED_MODEL. 
 
 
 
