@@ -1,340 +1,322 @@
 Day 01:
 =======
-LLM and Gen AI
-RAG
-More RAG
-Agentic AI
-Observability, Cost Awareness etc.
+System Message: Default behavior of the LLM (AI model)
+	You are an expert Python programmer and trainer.
+	You are an SME in Marketing Strategies
+User Message: Queries submitted by end-users.
+	Summarize this document.
+	What is the schedule of the latest FIFA world cup?
+AI/Assistant Message: The response from the LLM (model)
 
-Tokens:
-=======
-One word != One token.
-One word can be split into multiple tokens.
+User Message: 
+You are an expert stock analyst.
+Attached is a PDF of XYZ company.
+Can you tell me if this is a good option to invest in for the short term?
+Give your answer in 10 bullet points.
 
-LLMs (AI Models: GPT, Claude, Gemini...)
-LLM: Large Language Models
-Large:
-Language: Not Python, C#, C++, Java.
-	Spoken/written languages
-	LLMs can cater to many languages.
-	Machines/systems do not understand languages. They understand numbers.
-	We have dictionary of words - LLMs also have a vocabulary for each language.
-		- it is not in "words" per se, but in numerical format.
-		- this numerical representation of words is called TOKENS.
-	Not just words, punctuations also: , . = - + - * / ( )  [] ";~ -> Tokens
-[1234, 78569, 7845, 9552]
+You are a Personal Assistant.
+Answer queries or instructions from users.
+
+LLM: Large Language Model:
+--------------------------
+Large: Size of the data used to train the model is quite large + the internal parameters.
+	- Data is collected from all over the internet from the public domain.
+	- Text, images, videos, files (pdf, txt, csv, excel, docx etc.)
+	- ALSO, sometimes purchase data from wherever.
 	
-Probability: Next word generation
----
-LLM comes up with a list of "next most probable words"
-Query: The cat jumped over the:
-Words:
-dog
-chair
-table
+Language: NLP: Spoken language -> 
+	- LLMs can understand spoken (natural) language
+	- Can machines/systems really understand English or any language?
+	- They can only understand numbers!
+
+Tokenization:	
+Sentences are borken down into words.
+Words are converted into "tokens" - numerical representation of words.
+not just words, punctuations, special characters: + - ( > * & ~! @ , . ?
+
+Every LLM has it's own vocabulary of these "tokens" for any language that it supports.
+vocabulary === dictionary
+
+1 word != 1 token
+1 word could be broken down into >1 token.
+Capitalization: 77382, 2860
+Digitization:	46997, 2860
+
+Probability:
+LLM generates a list of relevant "most probable" next words:
 fence
-tree
-kid
-toy
 wall
 moon
-sleeping dog
-puddle
-:
-:
-
-AI (Assistant) Response:
-The cat jumped over the fence
-
 toy
-chair
+baby
 dog
+sofa
+table
+chair
+
+Query: Write a creative poem on Introduction to Generative AI
+LLM Input: Write a creative poem on Introduction to Generative AI
+LLM generates a list of most probable words and picks one:
+
+Write a creative poem on Introduction to Generative AI
+Generative
+
+I: 
+Write a creative poem on Introduction to Generative AI
+Generative
+O:
+Write a creative poem on Introduction to Generative AI
+Generative AI
+
+I:
+Write a creative poem on Introduction to Generative AI
+Generative AI
+O:
+Write a creative poem on Introduction to Generative AI
+Generative AI:
 
 
-LLMs are internally based on very complex Neural Network (NN).
+Tokens:
+Bank: Same word has a different meaning in a different context.
+Financial Bank			6922
+Blood Bank				6922
+The bank of a river		6922
 
-Generate an email to reply to a customer complaint about late delivery.
-Input to the LLM: Generate an email to reply to a customer complaint about late delivery.
-AI (Assistant/LLM) Response:
-Pass 1: List of most probable words, it will pick one: Apology
-Pass 2: Generate an email to reply to a customer complaint about late delivery. Apology
-	- this gets passed to the LLM again to determine the next probable word.
-	- for
-Pass 3: Generate an email to reply to a customer complaint about late delivery. Apology for
-Pass 4: Generate an email to reply to a customer complaint about late delivery. Apology for Delay
-Pass 5: Generate an email to reply to a customer complaint about late delivery. Apology for Delay in
-Pass 6: Generate an email to reply to a customer complaint about late delivery. Apology for Delay in Delivery
-
-Eventually:
-Dear [Customer Name],
-
-Thank you for bringing this matter to our attention.
-
-We sincerely apologize for the delay in delivering your order. We understand how frustrating it can be when an expected delivery does not arrive on time, and we regret any inconvenience this has caused.
-
-After reviewing your order, we found that the delay occurred due to [brief reason, e.g., unexpected logistics issues, carrier delays, high order volume, etc.]. While this is not the level of service we strive to provide, we are taking steps to ensure such delays are minimized in the future.
-
-Your order is currently [status update, e.g., in transit and expected to arrive on DD/MM/YYYY]. We are closely monitoring its progress and will keep you informed of any updates.
-
-As a gesture of goodwill, we would like to offer [discount, refund, store credit, etc., if applicable].
-
-We value your business and appreciate your patience and understanding. If you have any further questions or concerns, please feel free to contact us.
-
-Sincerely,
-
-[Your Name]
-[Your Position]
-[Company Name]
-[Contact Information]
+Tokenization:	Breaking down sentences into words: I like AI Capitalization -> ["I", "like", "AI", "Capital", "ization"]
+Vectorization:	Map the tokens to individual unique IDs/numbers ["I", "like", "AI"] -> [102, 96, 43]
+Embeddings:		Convert IDs into "deep vectors", to Add meaning and context. 
+	- ["I", "like", "AI"] -> [[0.12,0.5], [0.88,0.10], [0.41, 0.67]]
+	- GPS co-ordinates
 	
-Thee LLM is trained to understand the significance of each word with every other word, sentence and paragaph in the given context.
-
-The same word has a different meaning in different contexts.
-Ex: Bank
-Financial bank
-Bank of a river
-Blood bank
-
-bank: 6922
-
-LLM also has "reasoning power".
-- used not just for 
-
-"Which word to return next".
-- to explain the question properly.
-- it does not impact the "value" of the answer.
-- if you upload an csv file and ask it do some analysis on it - prediction.
-- Prediction will be the same, but the way the answer is generated (words it give to explain answer) is different every time.
-
-Context Window:
-Context window size is 8000 tokens
-System prompt: 	200 tokens
-User query:	   	100 tokens
--------------------------
-				300 tokens
-For the AI assistant to respond, it has 8000 - 300 tokens available: 7700 tokens
-
-System prompt: 	200 tokens
-User query:	   	100 tokens
-Document:	   3000 tokens
--------------------------
-			   3300 tokens
-For the AI assistant to respond, it has 8000 - 3300 tokens available: 4700 tokens
-
-System prompt: 	200 tokens
-User query:	   	100 tokens
-Document:	   3000 tokens
-More context:  1000 tokens
--------------------------
-			   4300 tokens
-For the AI assistant to respond, it has 8000 - 4300 tokens available: 3700 tokens
-
-Context window is made up of the:
-- system prompt
-- user query
-- docs (RAG)
-- other context
-- output (from the AI model)
-
-System prompt: 	200 tokens
-User query:	   	100 tokens
-Document:	   5000 tokens
-More context:  1000 tokens
--------------------------
-			   6300 tokens (input)
-For the AI assistant to respond, it has 8000 - 6300 tokens available: 1700 tokens.
-If the AI response is > the available no. of tokens (1700), the output will be truncated.
-
-
-
-Top-p:
----
-Query: The cat jumped over the:
-List of Probable Words:
-dog				0.05
-chair 			0.07
-table			0.09
-fence			0.30
-tree			0.01
-kid				0.03
-toy				0.10
-wall			0.25
-moon			0.20
-sleeping dog	0.05
-puddle			0.15
-:
-:
-
-top-p = 0.9 (90%)
-Order the list in descending order
-fence			0.30
-wall			0.25
-moon			0.20
-toy				0.10
-puddle			0.15
---------------------
-table			0.09
-chair 			0.07
-sleeping dog	0.05
-dog				0.05
-kid				0.03
-tree			0.01
-
-it will pick words that form the top 90% of the list at random.
-
-top-k: determines the size of the list of next probable words
-top-k = 25
-top-k = 5
-
-3 message types for LLMs:
-System
-User
-AI/Assistant
-
-Answers based on the data on which it has been trained.
-Oct/Nov 2022, -> ChatGPT was launched
-What happened in New York 2 days ago?
-I don't know because I don't have information about it yet.
-LLMs were trained on data that was at least 6-8 months old.
-
-But now,
-if it does not have the answer i it's "data", it fetches it from the internet automatically.
-"Searching the web"
-
-Hallucination does not necessarily mean it is wrong.
-It could "look right", but may not be so.
-
-
 dog
 cat
-kitten
 puppy
-queen
-king
+kitten
 man
 woman
+king
+queen
+
+
+LLMs: very complex Neural Networks
+Trained to understnd the significance of each word with every other word in a given context.
+
+Context Window:
+System prompt
+User prompt
+Documents (RAG)
+Additional context (info, examples, etc.)
+Output
+
+Context Window size: 8000 tokens
+System prompt:   200 tokens
+User prompt:	 100 tokens
+--------------------------
+				 300 tokens
+8000 - 300 = 7700 tokens -> available for the model to reply.
+
+System prompt:   200 tokens
+User prompt:	 100 tokens
+Document:		3000 tokens
+--------------------------
+				3300 tokens
+8000 - 3300 = 4700 tokens -> available for the model to reply.
+
+System prompt:   200 tokens
+User prompt:	 100 tokens
+Document:		3000 tokens
+Additional info:1000 tokens
+--------------------------
+				4300 tokens
+8000 - 3300 = 3700 tokens -> available for the model to reply.
+
+If the AI response is > than the available # of tokens for the output, the response will be truncated.
+
+Temperature: between 0 and 1.
+The more it is towards 0, the more deterministic will be the response of the LLM.
+The more it is towards 1, the more creative and varying will be the response of the LLM.
+
+For the same question, you expect the same answer (more or less), the temperature value must be closer to 0.
+For variety (creativity, randomness, etc.), the temperature value must be closer to 1.
+
+top-p: between 0 and 1.
+top-p: 0.95	(95%)
+prompt: the cat jumped over the
+most-probable next words:
+fence		0.30
+wall		0.25
+river		0.07
+building	0.06
+moon		0.20
+toy			0.15
+baby		0.10
+dog			0.08
+sofa		0.05
+table		0.05
+chair		0.20
+
+1: rearrange the list in desc order
+fence		0.30
+wall		0.25
+moon		0.20
+chair		0.20
+toy			0.15
+baby		0.10
+dog			0.08
+river		0.07
+building	0.06
+sofa		0.05
+table		0.05
+
+2: filter only those that form a cumulative 95%
+fence		0.30
+wall		0.25
+moon		0.20
+chair		0.20
+
+3. it will pick one randomly.
+
+top-k: size of the list of most-probable words:
+ -> 11 words
+fence		0.30
+wall		0.25
+river		0.07
+building	0.06
+moon		0.20
+toy			0.15
+baby		0.10
+dog			0.08
+sofa		0.05
+table		0.05
+chair		0.20
+
+top-k = 5
+fence		
+wall		
+river		
+building	
+moon		
+
+temperature
+top-p
+top-k
+
+Capitalization: Capital ization
+Generalization: General ization
+
+Generative: Gener ative
+Alternative: Altern ative
+
+
+Documents: created Embeddings
+user query: that has to search these documents for a relevant response.
+embed the query also.
 
 CTRL+SHIFT+P
 
-python -m pip install python-dotenv
-
-Day 02:
+DAY 02:
 =======
-top-k vs max-tokens
-
-top-k = how many "next probable" values/words will the LLM pick from.
-top-k=25
-
-max-tokens = size of the total tokens that the LLM can return (input+output) - context window.
-
-RAG vs Fine-tuning:
+RAG vs Fine-tuning (re-training a model):
 ---
-The AI system is RAG-enabled - look for answers from a "trusted source".
-- Documents: policies, SOPs, contracts, Standards, domain specific docs...
-- csv
+RAG: documents
 
-Fine-tuning:
-Niche process - trade secret.
-Use AI (LLM) to speed up the process of analysing company data to come up with decisions.
 
-ChatGpt (public)
-Create their own LLM specific to their work/process/data.
-Creating an LLM Scratch : very time consuming, very expensive, very talented and expert people.
-
-They took an existing LLM and "re-trained" it on their data/process.
-- Fine-tuning
-
-Llama3 - LLM from Meta (Facebook)
-Setup on their environment (private cloud, their servers) and fine-tuned it with their data/processes.
-- not publicly available.
-- fine-tuning requires tech people (programmers etc.)
-- cleansing the data
-	- invalid data
-	- missing data
-	- which columns/properties are to be used for training
-- how much of the data to use for training and testing and validation
-	- 70/20/10
-- work on the NN to train it to understand your data....
-- a lot of iterations
-- defining the behavior of the model
-	- system prompt
-	- output
+Data/datasets: Excel, csv, tables (DBs), APIs....docs also.
+GPT, Claude, Gemini --- LLMs/models --- trained on generic data collected from the internet.
+	- they can answer or perform any task
+	- generate text, summary, image, email, analyze, ....
 	
-Specific LLMs -> Medical research, Legal
-	- either built from scratch or they could be fine-tuned on specific domain data
+Specific LLM for our purpose only.
+Legal, Medical, Financial....
+- They need domain/business specific LLMs
+- Need a lot of data to begin with
+- Create their own LLMs
+	- a lot of resources -> servers, people (with the right expertise), time, money
+- Building from scratch is difficult
+- Take an existing model, and re-train/fine-tune it on their data.
+- Configure the model on their servers (on-prem, cloud) - within their network
+	- the data does not go outside the enterprise
+- Data cleansing
+	- Preparing the data
+	- Determine which data points/columns/features to use
+	- manage missing/invalid
+- Split the data into train, test and validate
+- the actual implementation of the NN.
+- will never work in the first try
+	- retry again and again with different parameter settings etc. till you come with a "comfortble" acceptance that the LLM is working as expected on YOUR DATA!!!!
 	
-RAG:
-- chunking
-- embedding
-- indexing
-
-1. Create the .env file in the root folder.
-	- provide your OPENAI_API_KEY
-2. Init the virtual env: python -m venv .venv
-
-Windows:
-3. .\.venv\Scripts\Activate.ps1
-
-Ubuntu/Mac:
-3. source ./.venv/bin/activate
+Fine-tuning: define behavior of the model
+	- What role to play
+	- what output in what format to return back
+	- any constraints
+	
+Steps for HOLs:
+1. clone the daily repo.
+2. Create python virtual env	-> python -m venv .venv
+3. Actiavte the virtual env		-> .venv\Scripts\Activate.ps   (source .venv/bin/activate)
+4. Create the .env files		-> Create in the root folder
+5. Add the OPENAI_API_KEY to the .env file (save)
+6. Run pip installs
+7. Work on TODOs
+8. Run the program
 
 Day 03:
 =======
-Either built from scratch or they could be fine tuned on specific domain data. How much of the data to use for training and testing and validation
+LLM internal basics:
+- Tokenization
+- Vectorization
+- Embeddings
+	- vector (multi-dimensional) space
+- Context
+- Context window
+- sampling and inference
+	- temperature
+	- top-p
+	- top-k
+	- probability
+		- how does the next word get generated
+- impact of tokens on cost
+- importance of giving relevant and proper prompts
+	- System Message (role)
+	- User Message (query)
+	- AI/Assistant Message (response from the AI tool/LLM/model)
+- demos
+RAG:
+- What is RAG?
+- Importance of RAG to enterprise
+	- avoid hallucination
+	- give grounded answers
+- RAG vs Fine-tuning
+- RAG Pipeline
+	- Ingest
+	- Chunking
+	- Embeddings
+	- Retrieve - the most relevant chunks for a given query
+		- embed the query
+	- Answer generation - by send the retrieved chunks to the LLM
+- Demo
 
-Chunk size = 10
-Chunk overlap = 3
-Chunk01: Either built from scratch or they could be fine tuned
-Chunk02: be fine tuned specific domain data. How much of the data to
-         -------------
-Chunk03: the data to use for training and testing and validation
-		 -----------
 
+RAG System Prompt:
+---
+You a HR assistant for Walmart Employees.
 
-Prompt:
-First look for data in the given RAG source.
+Answer ONLY from the provided context.
 If not found, look for information at these locations:
-http://www.someweb1.com/
-http://www.someweb2.com/
-http://www.someweb3.com/
+https://www.walmart.com
+https://www.walmart-policies.com
+https://www.glassdoor.com
 
-Or get the information from your training data.
+If still not found, say "I don't know".
 
-Get it from the internet.
-
+Generate the answer and provide details about the source from where you got the data.
+If it is from the provided context, then mention the filename, page number, section (if applicable).
 
 Context:
 {context}
 
-Question: {QUERY}
+Query:
+{Query}
 
-Leaves
-HR Policy
-Travel policy
-
-Determine the "type/category" of the user query:
-- leave
-- hr
-- travel
-- operations
-
-Ask the LLM to figure out the category.
-
-prompt = f""""
-Based on the query provided, determine the category of query.
-
-Categories are:
-- LeavePolicy
-- OperationsPolicy
-- HRPolicy
-- TravelPolicy
-- WellnessPolicy
-- AnalyticsPolicy
-- ProjectPolicy
-
-Query: {query}
-
-Return only one of the listed categories.
-"""
-
-Dynamically set the filter
+ChromaDB -> score is usually between 0 and 1.
+FAISS -> distance - lower the value, the more relevant it is
