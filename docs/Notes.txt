@@ -320,3 +320,17 @@ Query:
 
 ChromaDB -> score is usually between 0 and 1.
 FAISS -> distance - lower the value, the more relevant it is
+
+1234567890   -> **********  -> Masking
+1234567890   -> REMOVE
+1234567890   -> [PHONE NUMBER] -> Place holder
+
+Ajay Singala 	-> [CUSTOMER 1]
+John Smith		-> [CUSTOMER 2]
+
+Day 04:
+=======
+
+
+
+
