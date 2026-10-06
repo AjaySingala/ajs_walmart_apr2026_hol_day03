@@ -1,336 +1,218 @@
-Day 01:
-=======
-System Message: Default behavior of the LLM (AI model)
-	You are an expert Python programmer and trainer.
-	You are an SME in Marketing Strategies
-User Message: Queries submitted by end-users.
-	Summarize this document.
-	What is the schedule of the latest FIFA world cup?
-AI/Assistant Message: The response from the LLM (model)
+Day 1:
+===
+System Message - Default.
+User Message - input.
+	- any data (context) hat is provided
+	- docs/text
+AI Message - response from the model.
 
-User Message: 
-You are an expert stock analyst.
-Attached is a PDF of XYZ company.
-Can you tell me if this is a good option to invest in for the short term?
-Give your answer in 10 bullet points.
+LLMs work on Probability:
+- Which is the next best word to be returned to the user?
 
-You are a Personal Assistant.
-Answer queries or instructions from users.
+Tokens: words broken into tokens.
+Numbers: are numerical representation of the tokens.
+	- Dictionary (of words)
+	- LLMs have a dictionary (vocabulary) of tokens (numerical) in different supported languages.
+	- it is not just words in the vocabulary. It is also about punctuations, special chars, etc.
+	- One word is broken into multiple tokens.
 
-LLM: Large Language Model:
---------------------------
-Large: Size of the data used to train the model is quite large + the internal parameters.
-	- Data is collected from all over the internet from the public domain.
-	- Text, images, videos, files (pdf, txt, csv, excel, docx etc.)
-	- ALSO, sometimes purchase data from wherever.
-	
-Language: NLP: Spoken language -> 
-	- LLMs can understand spoken (natural) language
-	- Can machines/systems really understand English or any language?
-	- They can only understand numbers!
-
-Tokenization:	
-Sentences are borken down into words.
-Words are converted into "tokens" - numerical representation of words.
-not just words, punctuations, special characters: + - ( > * & ~! @ , . ?
-
-Every LLM has it's own vocabulary of these "tokens" for any language that it supports.
-vocabulary === dictionary
-
-1 word != 1 token
-1 word could be broken down into >1 token.
-Capitalization: 77382, 2860
-Digitization:	46997, 2860
-
+---
 Probability:
-LLM generates a list of relevant "most probable" next words:
-fence
-wall
-moon
-toy
-baby
-dog
-sofa
-table
-chair
+LLMs Neural Networks (NNs).
+- very complex NNs.
 
-Query: Write a creative poem on Introduction to Generative AI
-LLM Input: Write a creative poem on Introduction to Generative AI
-LLM generates a list of most probable words and picks one:
+Query: Write a creative poem on Introduction to Generative AI.
 
-Write a creative poem on Introduction to Generative AI
-Generative
-
-I: 
-Write a creative poem on Introduction to Generative AI
-Generative
-O:
-Write a creative poem on Introduction to Generative AI
-Generative AI
-
-I:
-Write a creative poem on Introduction to Generative AI
-Generative AI
-O:
-Write a creative poem on Introduction to Generative AI
-Generative AI:
-
-
-Tokens:
-Bank: Same word has a different meaning in a different context.
-Financial Bank			6922
-Blood Bank				6922
-The bank of a river		6922
-
-Tokenization:	Breaking down sentences into words: I like AI Capitalization -> ["I", "like", "AI", "Capital", "ization"]
-Vectorization:	Map the tokens to individual unique IDs/numbers ["I", "like", "AI"] -> [102, 96, 43]
-Embeddings:		Convert IDs into "deep vectors", to Add meaning and context. 
-	- ["I", "like", "AI"] -> [[0.12,0.5], [0.88,0.10], [0.41, 0.67]]
-	- GPS co-ordinates
+The entire query is passed to the LLM:
+Write a creative poem on Introduction to Generative AI.
+	- The words are converted into tokens.
 	
-dog
-cat
-puppy
-kitten
-man
-woman
-king
-queen
+The NN comes with a list of next probable words:
+The 	0.65
+Is		0.13
+A		0.86
+From	0.43
+India	0.06
+AI
+Where
+:
+:
+
+Returns "A".
+Then passes the query + "A" to the LLM again.
+
+"Write a creative poem on Introduction to Generative AI. A"
+List of most probable words:
+duty	0.4
+spark	0.9
+fire	0.1
+cloud	0.45
+:
+
+Return "spark".
+Passes:
+"Write a creative poem on Introduction to Generative AI. A spark"
+list of probable words:
+---
+
+Vectorization:
+Count Vectorization
+
+Temperature: controls randomness of the output.
+- value is between 0 and 1
+- 0: it is more deterministic
+- 1: it is more creative
+
+top-p: must be between 0 and 1.
+top-p: 0.9 (90%)
+The 	0.30
+Is		0.15
+A		0.45
+
+From	0.15
+India	0.10
+AI		0.05
+Where	0.01
+:
+:
+
+top-k: can be any number
+top-k = 50
+The 	0.30
+Is		0.15
+A		0.45
+From	0.15
+India	0.10
+
+Also used for further filtering after searching.
+
+top-p=0.8 (80%)
+---
+Embeddings:
+Giving meaning to the tokens given a context.
+
+Blood Bank		- Medicinal
+Bank of a River	- water-bodies
+ICICI Bank		- Money
+
+Embs are numerical representation of the "location" of the word/token in a gi en multi-dimension vector.
+
+They are like GPS co-ords.
+bank: [0.24, 0.56, 0.87]
+
+loan from a bank : bank - [0.24, 0.56, 0.87]
+river bank: bank - [0.40, 0.34, 0.98]
+blood bank: bank - [0.20, 0.30, 0.50]
+
+Search using Embeddings:
+- do not search word-to-word.
+- not a literal word search.
+- It is a "similarity" or "semantic" search.
+
+Words/tokens -> embeddings
+supply -> 12345 -> [,,]
+
+How does AI help in supply chain -> tokens+embs?
+supply -> 12345 -> [,,]
 
 
-LLMs: very complex Neural Networks
-Trained to understnd the significance of each word with every other word in a given context.
+On your desktop, create a folder called "HOL" (Hands-on Labs)
+Navigate to the HOL folder on the command prompt.
+cd HOL
+git clone <github url>
 
-Context Window:
-System prompt
-User prompt
-Documents (RAG)
-Additional context (info, examples, etc.)
-Output
+git clone https://github.com/AjaySingala/ajs_walmart_apr2026_hol_day01.git
+Creates a folder "ajs_walmart_apr2026_hol_day01" under "HOL".
 
-Context Window size: 8000 tokens
-System prompt:   200 tokens
-User prompt:	 100 tokens
---------------------------
-				 300 tokens
-8000 - 300 = 7700 tokens -> available for the model to reply.
+Open this folder in VSC
+Create the .env file in the root folder of your project.
+Configure your Python Virtual Envionment.
+Create venv:
+python -m venv .venv
 
-System prompt:   200 tokens
-User prompt:	 100 tokens
-Document:		3000 tokens
---------------------------
-				3300 tokens
-8000 - 3300 = 4700 tokens -> available for the model to reply.
-
-System prompt:   200 tokens
-User prompt:	 100 tokens
-Document:		3000 tokens
-Additional info:1000 tokens
---------------------------
-				4300 tokens
-8000 - 3300 = 3700 tokens -> available for the model to reply.
-
-If the AI response is > than the available # of tokens for the output, the response will be truncated.
-
-Temperature: between 0 and 1.
-The more it is towards 0, the more deterministic will be the response of the LLM.
-The more it is towards 1, the more creative and varying will be the response of the LLM.
-
-For the same question, you expect the same answer (more or less), the temperature value must be closer to 0.
-For variety (creativity, randomness, etc.), the temperature value must be closer to 1.
-
-top-p: between 0 and 1.
-top-p: 0.95	(95%)
-prompt: the cat jumped over the
-most-probable next words:
-fence		0.30
-wall		0.25
-river		0.07
-building	0.06
-moon		0.20
-toy			0.15
-baby		0.10
-dog			0.08
-sofa		0.05
-table		0.05
-chair		0.20
-
-1: rearrange the list in desc order
-fence		0.30
-wall		0.25
-moon		0.20
-chair		0.20
-toy			0.15
-baby		0.10
-dog			0.08
-river		0.07
-building	0.06
-sofa		0.05
-table		0.05
-
-2: filter only those that form a cumulative 95%
-fence		0.30
-wall		0.25
-moon		0.20
-chair		0.20
-
-3. it will pick one randomly.
-
-top-k: size of the list of most-probable words:
- -> 11 words
-fence		0.30
-wall		0.25
-river		0.07
-building	0.06
-moon		0.20
-toy			0.15
-baby		0.10
-dog			0.08
-sofa		0.05
-table		0.05
-chair		0.20
-
-top-k = 5
-fence		
-wall		
-river		
-building	
-moon		
-
-temperature
-top-p
-top-k
-
-Capitalization: Capital ization
-Generalization: General ization
-
-Generative: Gener ative
-Alternative: Altern ative
-
-
-Documents: created Embeddings
-user query: that has to search these documents for a relevant response.
-embed the query also.
-
+Activate the venv:
+Windows:
+	.venv\Scripts\Activate.ps1
+	
+Mac/Linux:
+	source .venv/bin/activate
+	
+Set the default Python interpreter in VSC:
+Install the Python (Microsoft) Extension.
 CTRL+SHIFT+P
+select: "Python: Select Interpreter"
 
-DAY 02:
-=======
-RAG vs Fine-tuning (re-training a model):
+This is very useful when you have multiuple Python versions on your machine.
+
+Now, install packages:
+- In each folder, refer to the installs.txt file for dependencies.
+- Run each "pip install".
+
+Run the code file(s).
+
+Day 2:
+===
+https://github.com/AjaySingala/ajs_walmart_apr2026_hol_day01
+
+Fine tuning:
 ---
-RAG: documents
-
-
-Data/datasets: Excel, csv, tables (DBs), APIs....docs also.
-GPT, Claude, Gemini --- LLMs/models --- trained on generic data collected from the internet.
-	- they can answer or perform any task
-	- generate text, summary, image, email, analyze, ....
+You have to retrain the model on specific data.
+Legal firm - have a huge dataset related to legal aspects.
+You want a "chatbot" that answers queries related to legal matters ONLY!
+	- NOT: 
+		- what is the GDP of France?
+		- who won the last FIFA WC?
+		- What is the latest news?
+	- CAN:
+		- What is the regulation regarding non-payment of loans?
+		
+One of top credit rating agencies
+	- AAA, AAA-...
+	- A very niche way of working.
+	- They do not want to share their trade secret.
+	- They fine-tuned an existiung LLM with their own dataset (huge)
+		- LLama3 - Meta (Facebook)
+		- setup on their own environment (cloud)
+		- trained it on their data.
+		- create their own chatbot (like ChatGPT) that employees use daily.
+		- ChatGPT, Gemini, Claude, Copilot are banned for employees.
+		
+Why not create your own LLM from scratch?
+	- not so easy
+	- very expensive (lot of resources, money, people, infra, time)
+	- you need to expertise to build the LLM from scratch
 	
-Specific LLM for our purpose only.
-Legal, Medical, Financial....
-- They need domain/business specific LLMs
-- Need a lot of data to begin with
-- Create their own LLMs
-	- a lot of resources -> servers, people (with the right expertise), time, money
-- Building from scratch is difficult
-- Take an existing model, and re-train/fine-tune it on their data.
-- Configure the model on their servers (on-prem, cloud) - within their network
-	- the data does not go outside the enterprise
-- Data cleansing
-	- Preparing the data
-	- Determine which data points/columns/features to use
-	- manage missing/invalid
-- Split the data into train, test and validate
-- the actual implementation of the NN.
-- will never work in the first try
-	- retry again and again with different parameter settings etc. till you come with a "comfortble" acceptance that the LLM is working as expected on YOUR DATA!!!!
+As part of fine tuning:
+	- cleanse the data
+	- domain expertise
+	- train the LLM on your cleansed data (70%)
+	- test it on an unseen dataset (20%)
+	- validate on a 3rd unseen dataset (10%)
+	- confidence level - answering properly
+
+Fine tuning - defining the behavior of your model
+	- default -> You are a Personal Assistant.
+	- Enterprise will define a specific role (System Prompt):
+		You are an expert Legal Advisor
+		Refer to only your training data when answering questions related to legal matters of the company.
+		Do not look for answers on the internet and do not make any assumptions.
+		
+		Provide the answers in a clear and concise manner.
+		Keep the tone professional.
+		
 	
-Fine-tuning: define behavior of the model
-	- What role to play
-	- what output in what format to return back
-	- any constraints
-	
-Steps for HOLs:
-1. clone the daily repo.
-2. Create python virtual env	-> python -m venv .venv
-3. Actiavte the virtual env		-> .venv\Scripts\Activate.ps   (source .venv/bin/activate)
-4. Create the .env files		-> Create in the root folder
-5. Add the OPENAI_API_KEY to the .env file (save)
-6. Run pip installs
-7. Work on TODOs
-8. Run the program
+https://github.com/AjaySingala/ajs_walmart_apr2026_hol_day02
 
-Day 03:
-=======
-LLM internal basics:
-- Tokenization
-- Vectorization
-- Embeddings
-	- vector (multi-dimensional) space
-- Context
-- Context window
-- sampling and inference
-	- temperature
-	- top-p
-	- top-k
-	- probability
-		- how does the next word get generated
-- impact of tokens on cost
-- importance of giving relevant and proper prompts
-	- System Message (role)
-	- User Message (query)
-	- AI/Assistant Message (response from the AI tool/LLM/model)
-- demos
-RAG:
-- What is RAG?
-- Importance of RAG to enterprise
-	- avoid hallucination
-	- give grounded answers
-- RAG vs Fine-tuning
-- RAG Pipeline
-	- Ingest
-	- Chunking
-	- Embeddings
-	- Retrieve - the most relevant chunks for a given query
-		- embed the query
-	- Answer generation - by send the retrieved chunks to the LLM
-- Demo
+E.g.:
+HOL\ajs_walmart_apr2026_hol_day01
+HOL\ajs_walmart_apr2026_hol_day02
 
-
-RAG System Prompt:
----
-You a HR assistant for Walmart Employees.
-
-Answer ONLY from the provided context.
-If not found, look for information at these locations:
-https://www.walmart.com
-https://www.walmart-policies.com
-https://www.glassdoor.com
-
-If still not found, say "I don't know".
-
-Generate the answer and provide details about the source from where you got the data.
-If it is from the provided context, then mention the filename, page number, section (if applicable).
-
-Context:
-{context}
-
-Query:
-{Query}
-
-ChromaDB -> score is usually between 0 and 1.
-FAISS -> distance - lower the value, the more relevant it is
-
-1234567890   -> **********  -> Masking
-1234567890   -> REMOVE
-1234567890   -> [PHONE NUMBER] -> Place holder
-
-Ajay Singala 	-> [CUSTOMER 1]
-John Smith		-> [CUSTOMER 2]
-
-Day 04:
-=======
-
-
-
-
+1. Cloe this repo
+2. Open the folder in VSC
+3. Create your .env file (next to config.py).
+4. Create the Py Virtual env
+5. Activate the virtual env
+6. Configure VSC to use the venv Python interpreter (CTRL+SHIFT+P -> Python: Select Interpreter)
+7. pip install (from specific folders)
+8. Complete TODOs
+9. Run code.
