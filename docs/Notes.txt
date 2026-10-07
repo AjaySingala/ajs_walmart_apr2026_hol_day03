@@ -207,7 +207,7 @@ E.g.:
 HOL\ajs_walmart_apr2026_hol_day01
 HOL\ajs_walmart_apr2026_hol_day02
 
-1. Cloe this repo
+1. Close this repo
 2. Open the folder in VSC
 3. Create your .env file (next to config.py).
 4. Create the Py Virtual env
@@ -216,3 +216,25 @@ HOL\ajs_walmart_apr2026_hol_day02
 7. pip install (from specific folders)
 8. Complete TODOs
 9. Run code.
+
+Day 3:
+===
+VectorDB: FAISS - lighweight, CPU
+- ChromaDB -> GPU
+- Weaviate
+- pgvector
+
+in-memory and persisted.
+
+Pipeline:
+- uses a VectorDB
+- loads files (pdf & txt)
+- chunks
+- embeds
+- creates index
+- retrieves
+	- query embedding
+	- top-k
+	- filtering
+- reranking
+- streams the answer
