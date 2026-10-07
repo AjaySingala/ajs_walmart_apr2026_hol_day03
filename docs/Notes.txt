@@ -206,8 +206,9 @@ https://github.com/AjaySingala/ajs_walmart_apr2026_hol_day02
 E.g.:
 HOL\ajs_walmart_apr2026_hol_day01
 HOL\ajs_walmart_apr2026_hol_day02
+HOL\ajs_walmart_apr2026_hol_day03
 
-1. Close this repo
+1. Clone this repo
 2. Open the folder in VSC
 3. Create your .env file (next to config.py).
 4. Create the Py Virtual env
